@@ -33,6 +33,7 @@ choice_skills = [
     "Дизайн",
 ]
 
+
 class CareerChoice(StatesGroup):
     education = State()
     experience = State()
@@ -73,7 +74,7 @@ async def process_vacancy(message: types.Message, state: FSMContext):
         f'💼 Опыт работы: {user_data["selected_experience"]}\n'
         f'🛠 Навыки: {message.text}\n\n'
         f'🔄 Чтобы заполнить заново, введите команду /resume\n'
-        f'🛑 Чтобы завершить работу, введите команду /stop'
+        f'🛑 Чтобы завершить работу или вернуться к выбору действий, введите команду /stop'
     )
     await message.answer(result_text, reply_markup=types.ReplyKeyboardRemove())
     await state.clear()
