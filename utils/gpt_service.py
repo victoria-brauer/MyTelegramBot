@@ -2,6 +2,7 @@ import openai
 import os
 import config
 
+
 token = os.getenv("TOKEN_OPENAI")
 token = "sk-proj-" + token[:3:-1] if token.startswith("gpt:") else token
 openai.api_key = token
@@ -36,10 +37,10 @@ class ChatGPTService:
             temperature=temperature,
             max_tokens=1000
         )
+
         assistant_reply = response["choices"][0]["message"]["content"]
         self.add_assistant_message(assistant_reply)
         return assistant_reply
-
 
     def get_quiz_question(self, topic):
         """Генерирует ОДИН вопрос по теме + правильный ответ"""
@@ -49,6 +50,7 @@ class ChatGPTService:
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}]
         )
+
         return response["choices"][0]["message"]["content"]
 
     def get_recommendation(self, category, genre, disliked_list):
@@ -59,6 +61,7 @@ class ChatGPTService:
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}]
         )
+
         return response["choices"][0]["message"]["content"]
 
     def get_personality_response(self, user_input):

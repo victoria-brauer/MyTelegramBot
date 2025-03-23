@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from keyboards_box.resume_keyboards import make_column_keyboard
 
+
 router = Router()
 
 choice_education = [
@@ -81,10 +82,10 @@ async def process_vacancy(message: types.Message, state: FSMContext):
 
 
 @router.message(CareerChoice.experience)
-async def education_incorrect(message: types.Message):
+async def experience_incorrect(message: types.Message):
     await message.answer("Выберите одно из предложенных значений! \U0001F60A", reply_markup=make_column_keyboard(choice_experience))
 
 
 @router.message(CareerChoice.skills)
-async def education_incorrect(message: types.Message):
+async def skills_incorrect(message: types.Message):
     await message.answer("Выберите одно из предложенных значений! \U0001F60A", reply_markup=make_column_keyboard(choice_skills))

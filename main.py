@@ -1,9 +1,8 @@
-import config
-import logging
-from aiogram import Bot, Dispatcher
 import asyncio
+import logging
+import config
+from aiogram import Bot, Dispatcher
 from handlers import common, career_choice, gpt_chat, space_photo, films_choice, talk_person, quiz
-
 
 
 async def main():
@@ -21,8 +20,6 @@ async def main():
     dp.include_router(quiz.router)
     dp.include_router(talk_person.router)
     dp.include_router(gpt_chat.router)
-
-
 
     await dp.start_polling(bot)
 

@@ -8,6 +8,3 @@ def get_personality_keyboard():
         [InlineKeyboardButton(text="Памела Андерсон", callback_data="pamela")],
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
-
-def get_end_keyboard():
-    return InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text="Закончить", callback_data="end")]])

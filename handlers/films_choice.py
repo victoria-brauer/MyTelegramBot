@@ -3,10 +3,9 @@ from aiogram.filters.command import Command
 from keyboards_box.kb_recommend import get_main_menu, get_choice_buttons
 from utils.gpt_service import ChatGPTService
 
+
 router = Router()
-
 gpt_service = ChatGPTService()
-
 user_disliked = {}
 
 
@@ -45,7 +44,7 @@ async def choose_genre(callback: types.CallbackQuery):
     if user_id not in user_disliked:
         user_disliked[user_id] = []
 
-    recommendation = gpt_service = ChatGPTService().get_recommendation(category, genre, user_disliked[user_id])
+    recommendation = gpt_service.get_recommendation(category, genre, user_disliked[user_id])
 
     await callback.message.edit_text(f"Я рекомендую:\n\n{recommendation}", reply_markup=get_choice_buttons())
 
@@ -54,17 +53,16 @@ async def choose_genre(callback: types.CallbackQuery):
 async def dislike_recommendation(callback: types.CallbackQuery):
     user_id = callback.from_user.id
     last_recommendation = callback.message.text.split("\n\n")[1]
-
     user_disliked[user_id].append(last_recommendation)
 
     await callback.answer("Запомнил, ищу другой вариант...")
 
-    # Получаем данные о категории и жанре
-    category = callback.message.text.split()[2]  # "Выбери жанр films:" -> Берём films
-    genre = callback.message.text.split()[3]  # "Выбери жанр films:" -> Берём жанр
 
-    # Запрашиваем новую рекомендацию
-    new_recommendation = gpt_service = ChatGPTService().get_recommendation(category, genre, user_disliked[user_id])
+    category = callback.message.text.split()[2]
+    genre = callback.message.text.split()[3]
+
+
+    new_recommendation = gpt_service.get_recommendation(category, genre, user_disliked[user_id])
 
     await callback.message.edit_text(f"Я рекомендую:\n\n{new_recommendation}", reply_markup=get_choice_buttons())
 

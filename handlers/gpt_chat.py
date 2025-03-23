@@ -3,10 +3,9 @@ from aiogram.filters.command import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from utils.gpt_service import ChatGPTService
 
+
 router = Router()
-
 gpt_service_chat = ChatGPTService()
-
 gpt_service_chat.set_system_message("Ты большая энциклопедия. Отвечай короткими, но интересными фактами")
 
 
@@ -30,16 +29,13 @@ async def command_gpt(message: types.Message):
 @router.message()
 async def handle_message(message: types.Message):
     gpt_service_chat.add_user_message(message.text)
-
     response = gpt_service_chat.get_response(message.text)
-
     await message.answer(response, reply_markup=get_stop_button())
 
 
 @router.callback_query(lambda c: c.data == "stop_gpt")
 async def stop_gpt(callback: types.CallbackQuery):
     """Обрабатывает нажатие на кнопку 'Завершить' и очищает историю сообщений."""
-    gpt_service_chat.message_history = []  # Очищаем историю сообщений
-
+    gpt_service_chat.message_history = []
     await callback.message.edit_text("🛑 Окей, жду новых запросов! Введи /gpt, чтобы начать заново.")
     await callback.answer()

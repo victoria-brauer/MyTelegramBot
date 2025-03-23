@@ -7,7 +7,6 @@ router = Router()
 
 
 @router.message(Command("space"))
-@router.message(Command("космос"))
 async def command_space(message: types.Message):
     title, url = space()
     await message.answer(f"Лови космическое фото дня\U0001F680: {title}\U0001F52D")

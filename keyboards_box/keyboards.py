@@ -9,8 +9,6 @@ button_6 = types.KeyboardButton(text="/talk")
 button_7 = types.KeyboardButton(text="/quiz")
 button_8 = types.KeyboardButton(text="/stop")
 
-
-
 keyboard_1 = [
     [button_1, button_2],
     [button_3, button_4],

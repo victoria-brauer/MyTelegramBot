@@ -1,7 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 def get_topic_keyboard():
-    """Создает кнопки с темами"""
     buttons = [
         [InlineKeyboardButton(text="История", callback_data="quiz_history")],
         [InlineKeyboardButton(text="Наука", callback_data="quiz_science")],
@@ -11,7 +10,6 @@ def get_topic_keyboard():
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
 def get_quiz_buttons():
-    """Кнопки для продолжения квиза"""
     buttons = [
         [InlineKeyboardButton(text="🎭 Сменить тему", callback_data="change_topic")],
         [InlineKeyboardButton(text="🏁 Закончить квиз", callback_data="end_quiz")]
